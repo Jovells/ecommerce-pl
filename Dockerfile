@@ -7,8 +7,8 @@ COPY package*.json ./
 
 COPY . .
 RUN yarn install
-RUN yarn build
 RUN npx kill-port 3000
+RUN yarn build
 
 FROM base as runtime
 
