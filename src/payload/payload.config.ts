@@ -54,6 +54,17 @@ export default buildConfig({
     webpack: config => {
       return {
         ...config,
+        plugins: [...config.plugins,
+          {apply: (compiler) => {
+            compiler.hooks.done.tap("DonePlugin", (stats) => {
+              console.log("Compile is done !");
+              setTimeout(() => {
+                process.exit(0);
+              });
+            });
+          }}
+        ],
+        
         resolve: {
           ...config.resolve,
           alias: {
