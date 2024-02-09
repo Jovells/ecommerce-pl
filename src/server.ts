@@ -15,7 +15,9 @@ import payload from 'payload'
 import { seed } from './payload/seed'
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
+
+console.log('PORT', PORT)
 
 // Redirect root to the admin panel
 app.get('/', (_, res) => {

@@ -39,10 +39,15 @@ dotenv.config({
   path: path.resolve(__dirname, '../../.env'),
 })
 
+
 export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    autoLogin:{
+      email: "demo@payloadcms.com",
+      password: "demo"
+    },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
@@ -52,19 +57,18 @@ export default buildConfig({
       beforeDashboard: [BeforeDashboard],
     },
     webpack: config => {
+      // thsi is here because the server will not stop after the build is done and this affects deployment
+      const forProd = process.env.NODE_ENV === 'production'? [...config.plugins,{apply: (compiler) => {
+        compiler.hooks.done.tap("DonePlugin", (stats) => {
+          console.log("Compile is done !");
+          setTimeout(() => {
+            process.exit(0);
+          });
+        });
+      }}] : config.plugins
       return {
         ...config,
-        plugins: [...config.plugins,
-          {apply: (compiler) => {
-            compiler.hooks.done.tap("DonePlugin", (stats) => {
-              console.log("Compile is done !");
-              setTimeout(() => {
-                process.exit(0);
-              });
-            });
-          }}
-        ],
-        
+        plugins: forProd,
         resolve: {
           ...config.resolve,
           alias: {
@@ -98,10 +102,10 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  cors: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
+  cors: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SITE_URL || '', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
     Boolean,
   ),
-  csrf: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
+  csrf: ['https://checkout.stripe.com', process.env.PAYLOAD_PUBLIC_SITE_URL || '', process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(
     Boolean,
   ),
   endpoints: [
