@@ -13,14 +13,7 @@ import { CustomerSelect } from './ui/CustomerSelect'
 
 const Users: CollectionConfig = {
   slug: 'users',
-  auth: {
-    tokenExpiration: 28800, // 8 hours
-    cookies: {
-      sameSite: 'none',
-      secure: true,
-      domain: process.env.COOKIE_DOMAIN,
-    },
-  },
+  auth: true,
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email'],
