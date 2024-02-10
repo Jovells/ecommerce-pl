@@ -44,9 +44,10 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
-    autoLogin: process.env.NODE_ENV === 'development' && {
+    autoLogin: {
       email: 'demo@payloadcms.com',
       password: 'demo',
+      prefillOnly: true,
     },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
