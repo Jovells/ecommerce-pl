@@ -13,14 +13,6 @@ import { CustomerSelect } from './ui/CustomerSelect'
 
 const Users: CollectionConfig = {
   slug: 'users',
-  auth: {
-    tokenExpiration: 28800, // 8 hours
-    cookies: {
-      sameSite: 'none',
-      secure: true,
-      domain: process.env.COOKIE_DOMAIN,
-    },
-  },
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email'],
@@ -36,6 +28,7 @@ const Users: CollectionConfig = {
     beforeChange: [createStripeCustomer],
     afterChange: [loginAfterCreate],
   },
+  auth: true,
   endpoints: [
     {
       path: '/:teamID/customer',
