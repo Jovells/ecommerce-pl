@@ -46,6 +46,8 @@ export interface Page {
   publishedOn?: string | null;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'customHero';
+    heading: string;
+    subtext: string;
     richText: {
       [k: string]: unknown;
     }[];

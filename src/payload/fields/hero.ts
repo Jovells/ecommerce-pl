@@ -39,6 +39,21 @@ export const hero: Field = {
         },
       ],
     },
+
+    {
+      name: 'heading',
+      label: 'Heading',
+      type: 'text',
+      defaultValue: 'Hero Heading',
+      required: true,
+    },
+    {
+      name: 'subtext',
+      label: 'Subtext',
+      defaultValue: 'Hero Subtext',
+      type: 'textarea',
+      required: true,
+    },
     richText({
       admin: {
         elements: ['h1', largeBody, label, 'link'],

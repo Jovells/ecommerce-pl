@@ -58,6 +58,8 @@ scalar DateTime
 
 type Page_Hero {
   type: Page_Hero_type
+  heading: String
+  subtext: String
   richText(depth: Int): JSON
   links: [Page_Hero_Links!]
   media(where: Page_Hero_Media_where): Media
@@ -1664,6 +1666,8 @@ input Page_where {
   title: Page_title_operator
   publishedOn: Page_publishedOn_operator
   hero__type: Page_hero__type_operator
+  hero__heading: Page_hero__heading_operator
+  hero__subtext: Page_hero__subtext_operator
   hero__richText: Page_hero__richText_operator
   hero__links__link__type: Page_hero__links__link__type_operator
   hero__links__link__newTab: Page_hero__links__link__newTab_operator
@@ -1721,6 +1725,23 @@ enum Page_hero__type_Input {
   mediumImpact
   lowImpact
   customHero
+}
+
+input Page_hero__heading_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Page_hero__subtext_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
 }
 
 input Page_hero__richText_operator {
@@ -1902,6 +1923,8 @@ input Page_where_and {
   title: Page_title_operator
   publishedOn: Page_publishedOn_operator
   hero__type: Page_hero__type_operator
+  hero__heading: Page_hero__heading_operator
+  hero__subtext: Page_hero__subtext_operator
   hero__richText: Page_hero__richText_operator
   hero__links__link__type: Page_hero__links__link__type_operator
   hero__links__link__newTab: Page_hero__links__link__newTab_operator
@@ -1928,6 +1951,8 @@ input Page_where_or {
   title: Page_title_operator
   publishedOn: Page_publishedOn_operator
   hero__type: Page_hero__type_operator
+  hero__heading: Page_hero__heading_operator
+  hero__subtext: Page_hero__subtext_operator
   hero__richText: Page_hero__richText_operator
   hero__links__link__type: Page_hero__links__link__type_operator
   hero__links__link__newTab: Page_hero__links__link__newTab_operator
@@ -2043,6 +2068,8 @@ type PagesDocAccessFields_hero_Delete {
 
 type PagesDocAccessFields_hero_Fields {
   type: PagesDocAccessFields_hero_type
+  heading: PagesDocAccessFields_hero_heading
+  subtext: PagesDocAccessFields_hero_subtext
   richText: PagesDocAccessFields_hero_richText
   links: PagesDocAccessFields_hero_links
   media: PagesDocAccessFields_hero_media
@@ -2068,6 +2095,52 @@ type PagesDocAccessFields_hero_type_Update {
 }
 
 type PagesDocAccessFields_hero_type_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_heading {
+  create: PagesDocAccessFields_hero_heading_Create
+  read: PagesDocAccessFields_hero_heading_Read
+  update: PagesDocAccessFields_hero_heading_Update
+  delete: PagesDocAccessFields_hero_heading_Delete
+}
+
+type PagesDocAccessFields_hero_heading_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_heading_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_heading_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_heading_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_subtext {
+  create: PagesDocAccessFields_hero_subtext_Create
+  read: PagesDocAccessFields_hero_subtext_Read
+  update: PagesDocAccessFields_hero_subtext_Update
+  delete: PagesDocAccessFields_hero_subtext_Delete
+}
+
+type PagesDocAccessFields_hero_subtext_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_subtext_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_subtext_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_subtext_Delete {
   permission: Boolean!
 }
 
@@ -2631,6 +2704,8 @@ type PageVersion_Version {
 
 type PageVersion_Version_Hero {
   type: PageVersion_Version_Hero_type
+  heading: String
+  subtext: String
   richText(depth: Int): JSON
   links: [PageVersion_Version_Hero_Links!]
   media(where: PageVersion_Version_Hero_Media_where): Media
@@ -3199,6 +3274,8 @@ input versionsPage_where {
   version__title: versionsPage_version__title_operator
   version__publishedOn: versionsPage_version__publishedOn_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__heading: versionsPage_version__hero__heading_operator
+  version__hero__subtext: versionsPage_version__hero__subtext_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
   version__hero__links__link__newTab: versionsPage_version__hero__links__link__newTab_operator
@@ -3268,6 +3345,23 @@ enum versionsPage_version__hero__type_Input {
   mediumImpact
   lowImpact
   customHero
+}
+
+input versionsPage_version__hero__heading_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input versionsPage_version__hero__subtext_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
 }
 
 input versionsPage_version__hero__richText_operator {
@@ -3478,6 +3572,8 @@ input versionsPage_where_and {
   version__title: versionsPage_version__title_operator
   version__publishedOn: versionsPage_version__publishedOn_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__heading: versionsPage_version__hero__heading_operator
+  version__hero__subtext: versionsPage_version__hero__subtext_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
   version__hero__links__link__newTab: versionsPage_version__hero__links__link__newTab_operator
@@ -3508,6 +3604,8 @@ input versionsPage_where_or {
   version__title: versionsPage_version__title_operator
   version__publishedOn: versionsPage_version__publishedOn_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__heading: versionsPage_version__hero__heading_operator
+  version__hero__subtext: versionsPage_version__hero__subtext_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
   version__hero__links__link__newTab: versionsPage_version__hero__links__link__newTab_operator
@@ -8518,6 +8616,8 @@ type PagesFields_hero_Delete {
 
 type PagesFields_hero_Fields {
   type: PagesFields_hero_type
+  heading: PagesFields_hero_heading
+  subtext: PagesFields_hero_subtext
   richText: PagesFields_hero_richText
   links: PagesFields_hero_links
   media: PagesFields_hero_media
@@ -8543,6 +8643,52 @@ type PagesFields_hero_type_Update {
 }
 
 type PagesFields_hero_type_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_heading {
+  create: PagesFields_hero_heading_Create
+  read: PagesFields_hero_heading_Read
+  update: PagesFields_hero_heading_Update
+  delete: PagesFields_hero_heading_Delete
+}
+
+type PagesFields_hero_heading_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_heading_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_heading_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_heading_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_subtext {
+  create: PagesFields_hero_subtext_Create
+  read: PagesFields_hero_subtext_Read
+  update: PagesFields_hero_subtext_Update
+  delete: PagesFields_hero_subtext_Delete
+}
+
+type PagesFields_hero_subtext_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_subtext_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_subtext_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_subtext_Delete {
   permission: Boolean!
 }
 
@@ -11857,6 +12003,8 @@ input mutationPageInput {
 
 input mutationPage_HeroInput {
   type: Page_Hero_type_MutationInput!
+  heading: String!
+  subtext: String!
   richText: JSON!
   links: [mutationPage_Hero_LinksInput]
   media: String
@@ -11925,6 +12073,8 @@ input mutationPageUpdateInput {
 
 input mutationPageUpdate_HeroInput {
   type: PageUpdate_Hero_type_MutationInput!
+  heading: String!
+  subtext: String!
   richText: JSON!
   links: [mutationPageUpdate_Hero_LinksInput]
   media: String
