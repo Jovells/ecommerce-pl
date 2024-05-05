@@ -10,6 +10,7 @@ import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 import { loginAfterCreate } from './hooks/loginAfterCreate'
 import { resolveDuplicatePurchases } from './hooks/resolveDuplicatePurchases'
 import { CustomerSelect } from './ui/CustomerSelect'
+import { managers } from '../../access/managers'
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -30,7 +31,7 @@ const Users: CollectionConfig = {
     create: anyone,
     update: adminsAndUser,
     delete: admins,
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
+    admin: managers,
   },
   hooks: {
     beforeChange: [createStripeCustomer],
@@ -66,6 +67,10 @@ const Users: CollectionConfig = {
         {
           label: 'customer',
           value: 'customer',
+        },
+        {
+          label: 'manager',
+          value: 'manager',
         },
       ],
       hooks: {

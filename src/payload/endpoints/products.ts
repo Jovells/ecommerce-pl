@@ -14,7 +14,7 @@ const logs = process.env.LOGS_STRIPE_PROXY === '1'
 // prevents unauthorized or non-admin users from accessing all Stripe products
 // GET /api/products
 export const productsProxy: PayloadHandler = async (req: PayloadRequest, res) => {
-  if (!req.user || !checkRole(['admin'], req.user)) {
+  if (!req.user || !checkRole(['admin', 'manager'], req.user)) {
     if (logs) req.payload.logger.error({ err: `You are not authorized to access products` })
     res.status(401).json({ error: 'You are not authorized to access products' })
     return

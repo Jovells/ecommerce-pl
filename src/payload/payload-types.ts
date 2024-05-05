@@ -443,7 +443,7 @@ export interface Order {
 export interface User {
   id: string;
   name?: string | null;
-  roles?: ('admin' | 'customer')[] | null;
+  roles?: ('admin' | 'customer' | 'manager')[] | null;
   purchases?: (string | Product)[] | null;
   stripeCustomerID?: string | null;
   cart?: {

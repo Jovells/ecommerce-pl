@@ -30,6 +30,7 @@ import { priceUpdated } from './stripe/webhooks/priceUpdated'
 import { productUpdated } from './stripe/webhooks/productUpdated'
 import { gcsAdapter } from '@payloadcms/plugin-cloud-storage/gcs'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { admins } from './access/admins'
 
 const adapter = gcsAdapter({
   options: {
@@ -52,11 +53,11 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(), // bundler-config
-    autoLogin: {
-      email: 'demo@payloadcms.com',
-      password: 'demo',
-      prefillOnly: true,
-    },
+    // autoLogin: {
+    //   email: 'demo@payloadcms.com',
+    //   password: 'demo',
+    //   prefillOnly: true,
+    // },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
@@ -162,6 +163,14 @@ export default buildConfig({
     }),
     redirects({
       collections: ['pages', 'products'],
+      overrides: {
+        access: {
+          read: admins,
+          update: admins,
+          create: admins,
+          delete: admins,
+        },
+      },
     }),
     nestedDocs({
       collections: ['categories'],

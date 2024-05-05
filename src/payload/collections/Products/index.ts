@@ -12,6 +12,7 @@ import { beforeProductChange } from './hooks/beforeChange'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
 import { revalidateProduct } from './hooks/revalidateProduct'
 import { ProductSelect } from './ui/ProductSelect'
+import { managers } from '../../access/managers'
 
 const Products: CollectionConfig = {
   slug: 'products',
@@ -35,9 +36,9 @@ const Products: CollectionConfig = {
   },
   access: {
     read: () => true,
-    create: admins,
-    update: admins,
-    delete: admins,
+    create: managers,
+    update: managers,
+    delete: managers,
   },
   fields: [
     {

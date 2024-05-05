@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload/types'
 import { admins } from '../../access/admins'
 import { adminsOrLoggedIn } from '../../access/adminsOrLoggedIn'
 import { adminsOrOrderedBy } from './access/adminsOrOrderedBy'
+import { managers } from '../../access/managers'
 import { clearUserCart } from './hooks/clearUserCart'
 import { populateOrderedBy } from './hooks/populateOrderedBy'
 import { updateUserPurchases } from './hooks/updateUserPurchases'
@@ -20,9 +21,9 @@ export const Orders: CollectionConfig = {
   },
   access: {
     read: adminsOrOrderedBy,
-    update: admins,
+    update: args => admins(args) || managers(args),
     create: adminsOrLoggedIn,
-    delete: admins,
+    delete: args => admins(args) || managers(args),
   },
   fields: [
     {
